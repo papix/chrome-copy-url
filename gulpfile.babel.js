@@ -33,6 +33,11 @@ gulp.task('manifest', (done) => {
     .pipe(gulp.dest('build'));
 })
 
+gulp.task('html', (done) => {
+  return gulp.src('src/html/*.html')
+    .pipe(gulp.dest('build/html'));
+});
+
 gulp.task('bundle', (done) => {
   return gulp.src('.js')
     .pipe(plugin.plumber())
@@ -40,6 +45,7 @@ gulp.task('bundle', (done) => {
       mode: 'production',
       entry: {
         background: './.js/background.js',
+        app: './.js/app.js',
       },
       output: {
         path: `${__dirname}/build/js`,
@@ -49,7 +55,7 @@ gulp.task('bundle', (done) => {
     .pipe(gulp.dest('./build/js'));
 })
 
-gulp.task('build', gulp.series('clean', 'compile', gulp.parallel('manifest', 'bundle')), (done) => {
+gulp.task('build', gulp.series('clean', 'compile', gulp.parallel('manifest', 'html', 'bundle')), (done) => {
   done();
 });
 
