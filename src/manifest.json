@@ -1,0 +1,11 @@
+{
+  "name": "__NAME__",
+  "version": "__VERSION__",
+  "manifest_version": 2,
+  "description": "__DESCRIPTION__",
+  "permissions": ["tabs", "clipboardWrite"],
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "browser_action": {}
+}

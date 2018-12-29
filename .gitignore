@@ -1,0 +1,8 @@
+.DS_Store
+
+npm-debug.log
+
+/.js/
+/build/
+/node_modules/
+/packages/
