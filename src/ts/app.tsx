@@ -1,9 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-
-interface Options {
-  decodeUrlEncode: boolean;
-}
+import { Options } from './types'
 
 interface Props {
   options: Options;
