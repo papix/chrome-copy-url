@@ -1,8 +1,16 @@
+import { Options } from './types'
+
 chrome.browserAction.onClicked.addListener((tab) => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    const url = tabs[0].url;
+    var url = tabs[0].url;
 
     if (url) {
+      const options = loadOptions();
+
+      if (options.decodeUrlEncode) {
+        url = decodeURI(url)
+      }
+
       saveClipboard(url);
     }
   });
@@ -20,3 +28,16 @@ function saveClipboard(text: string) {
 
   document.body.removeChild(textArea);
 }
+
+function loadOptions() : Options {
+  if (localStorage.getItem('options')) {
+    try {
+      return JSON.parse(localStorage.getItem('options'));
+    } catch(e) {
+      return <Options>{};
+    }
+  }
+}
+
+
+

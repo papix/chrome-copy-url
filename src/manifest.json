@@ -8,5 +8,6 @@
     "scripts": ["js/background.js"],
     "persistent": false
   },
-  "browser_action": {}
+  "browser_action": {},
+  "options_page": "html/option_page.html"
 }
