@@ -1,4 +1,4 @@
-import { Option } from './types'
+import loadOption from './loadOption'
 
 chrome.browserAction.onClicked.addListener((tab) => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -27,14 +27,4 @@ function saveClipboard(text: string) {
   document.execCommand("copy");
 
   document.body.removeChild(textArea);
-}
-
-function loadOption() : Option {
-  if (localStorage.getItem('option')) {
-    try {
-      return JSON.parse(localStorage.getItem('option'));
-    } catch(e) {
-      return <Option>{};
-    }
-  }
 }

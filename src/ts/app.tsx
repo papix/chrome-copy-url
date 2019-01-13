@@ -2,6 +2,7 @@ import QueryFilter from './app/queryFilter';
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Option, QueryFilterOption } from './types'
+import loadOption from './loadOption'
 
 interface Props {
   option: Option;
@@ -72,13 +73,7 @@ function save(option: Option) {
   localStorage.setItem('option', JSON.stringify(option));
 }
 
-const loadedOption = JSON.parse(localStorage.getItem('option') || '{}');
-const option: Option = {
-  ...loadedOption,
-  queryFilter: {
-    ...loadedOption.queryFilter
-  },
-}
+const option = loadOption();
 
 ReactDOM.render(
   <App save={save} option={option} />,
