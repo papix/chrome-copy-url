@@ -25,7 +25,6 @@ class App extends React.PureComponent<Props, State> {
     return (event) => {
       const value = event.target.checked;
       this.setState({
-        ...this.state,
         option: {
           ...this.state.option,
           [key]: value,
@@ -38,12 +37,11 @@ class App extends React.PureComponent<Props, State> {
     this.props.save(this.state.option);
   }
 
-  updateQueryFilterOption = (option: QueryFilterOption) => {
+  updateQueryFilterOption = (queryFilterOption: QueryFilterOption) => {
     this.setState({
-      ...this.state,
       option: {
         ...this.state.option,
-        queryFilter: option,
+        queryFilter: queryFilterOption,
       }
     });
   }
