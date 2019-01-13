@@ -1,3 +1,8 @@
-export interface Options {
+export interface Option {
   decodeUrlEncode: boolean;
+  queryFilter: QueryFilterOption;
+}
+
+export interface QueryFilterOption {
+  autoDeleteKeys: string[];
 }

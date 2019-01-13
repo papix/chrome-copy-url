@@ -1,17 +1,17 @@
-import { Options } from './types'
+import { Option } from './types'
 
 chrome.browserAction.onClicked.addListener((tab) => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    var url = tabs[0].url;
+    if (tabs[0].url) {
+      const option = loadOption();
+      const fetchedUrl = option.decodeUrlEncode ? decodeURI(tabs[0].url) : tabs[0].url;
 
-    if (url) {
-      const options = loadOptions();
+      const url = new URL(fetchedUrl);
+      option.queryFilter.autoDeleteKeys.map((key) => {
+        url.searchParams.delete(key);
+      });
 
-      if (options.decodeUrlEncode) {
-        url = decodeURI(url)
-      }
-
-      saveClipboard(url);
+      saveClipboard(url.toString());
     }
   });
 });
@@ -29,15 +29,12 @@ function saveClipboard(text: string) {
   document.body.removeChild(textArea);
 }
 
-function loadOptions() : Options {
-  if (localStorage.getItem('options')) {
+function loadOption() : Option {
+  if (localStorage.getItem('option')) {
     try {
-      return JSON.parse(localStorage.getItem('options'));
+      return JSON.parse(localStorage.getItem('option'));
     } catch(e) {
-      return <Options>{};
+      return <Option>{};
     }
   }
 }
-
-
-
